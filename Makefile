@@ -6,11 +6,16 @@
 #    By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 15:56:17 by rdas-nev          #+#    #+#              #
-#    Updated: 2022/04/25 15:59:42 by rdas-nev         ###   ########.fr        #
+#    Updated: 2022/04/27 17:52:17 by rdas-nev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= 
+SRCS	= error_check.c ft_printf.c ft_putstr.c ft_atoi.c ft_putunsigned.c \
+		  ft_bzero.c ft_putchar.c ft_strlen.c pushes.c ft_calloc.c ft_puthex.c \
+		  ft_strupper.c reverses.c ft_itoa.c ft_putptr.c ft_uitoa.c rotates.c \
+		  ft_memset.c ft_putsigned.c swaps.c pushswap.c ft_lstnew.c ft_lstadd_back.c \
+		  ft_lstadd_front.c ft_lstlast.c ft_lstindex.c ft_lstsize.c \
+
 
 OBJS	= $(addprefix objs/,$(SRCS:.c=.o))
 
@@ -18,7 +23,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RM		= rm -f
 
-NAME	= fdf
+NAME	= push_swap
 
 # COLORS
 
