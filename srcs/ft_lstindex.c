@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:02:09 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/27 16:45:38 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:49:18 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_stack	*ft_lstindex(int index, t_stack *stack)
 
 	ret = stack;
 	c = 0;
-	while ((c++ < index + 1) && ret)
+	while ((c++ < index) && ret)
 		ret = ret->next;
 	return (ret);
 }

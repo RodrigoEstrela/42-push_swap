@@ -6,14 +6,14 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 18:07:00 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/27 18:10:27 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:20:20 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void	ft_lstdelone(t_stack *stck, void (*del)(void *))
+/*void	ft_lstdelone(t_stack *stck, void (*del)(void *))
 {
-	del(stck -> content);
+	del(stck -> cont);
 	free(stck);
-}
+}*/
