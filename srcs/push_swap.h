@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/02 15:45:24 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:40:10 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include"libft.h"
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
 typedef struct	s_stacks
 {
@@ -64,3 +65,5 @@ void				mvmnts_tester(t_supsta *sup);
 void				check_same(int ac, t_stack *stck);
 
 void				error_input_check(int ac, char **av);
+
+bool				is_number(char number[]);

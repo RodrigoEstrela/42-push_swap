@@ -6,13 +6,13 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:40:36 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/18 15:45:08 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:57:36 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	int			i;
 	int			n;

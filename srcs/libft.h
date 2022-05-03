@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:46:29 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/27 14:27:47 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:58:48 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int	ft_atoi(const char *str);
+long long	ft_atoi(const char *str);
 
 int			ft_isascii(int c);
 

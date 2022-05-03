@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/02 15:46:10 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:05:07 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,6 @@ int main(int ac, char **av)
 	t_supsta *sup;
 	
 	error_input_check(ac, av);	
-	while(++i < ac)
-	{
-		if (ft_isdigit(ft_atoi(av[i])))
-		{
-			ft_printf("%d", ft_isdigit(ft_atoi(av[i])));
-			ft_printf("Error\n");
-			exit(0);
-		}
-	}
 	sup = malloc(sizeof(t_supsta));
 	ft_printf("ac: %d\n", ac);
 	i = 0;
@@ -56,7 +47,7 @@ int main(int ac, char **av)
 		nb = ft_atoi(av[i]);
 		ft_lstadd_back(&sup->a, ft_lstnew(nb));
 	}
-//	check_same(ac, sup->a);
-	mvmnts_tester(sup);
+	check_same(ac, sup->a);
+//	mvmnts_tester(sup);
 	exit(0);
 }
