@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/29 16:47:40 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:45:24 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ t_supsta			*pb(t_supsta *sup);
 
 t_supsta			*pa(t_supsta *sup);
 
+t_stack				*rotater(t_stack *stck);
+
+void				*super_rotater(t_supsta *sup);
+
 t_stack				*reverse_rotater(t_stack *stck);
 
 t_supsta			*sup_rev_rot(t_supsta *sup);
@@ -56,3 +60,7 @@ t_supsta			*sup_rev_rot(t_supsta *sup);
 void				print_stacks(t_stack *stck_a, t_stack *stck_b);
 
 void				mvmnts_tester(t_supsta *sup);
+
+void				check_same(int ac, t_stack *stck);
+
+void				error_input_check(int ac, char **av);

@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 15:11:23 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/04/29 16:55:09 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:41:03 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	*rotater(t_stack *stck)
 {
 	t_stack	*tmp;
 
-	if (!stck)
+	if (!stck || ft_lstsize(stck) < 2)
 		return (stck);
 	tmp = stck->next;
 	stck->next = NULL;
@@ -48,7 +48,7 @@ t_stack	*reverse_rotater(t_stack *stck)
 {
 	t_stack	*tmp;
 
-	if (!stck)
+	if (!stck || ft_lstsize(stck) < 2)
 		return (stck);
 	tmp = ft_lstlast(stck);
 	ft_stck_last_menos_um(stck)->next = NULL;
