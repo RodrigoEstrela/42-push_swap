@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:46:29 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/03 15:58:48 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:49:14 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ char		*ft_strrchr(const char *s, int c);
 
 void		ft_putunbr_fd(unsigned int nb, int fd);
 
-//t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

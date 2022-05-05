@@ -6,20 +6,23 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/03 15:40:10 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:55:55 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"ft_printf.h"
-#include"libft.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-typedef struct	s_stacks
+# include"ft_printf.h"
+# include"libft.h"
+# include<stdio.h>
+# include<stdlib.h>
+# include<stdbool.h>
+
+typedef struct s_stacks
 {
 	int				cnt;
-	struct s_stacks *next;
+	struct s_stacks	*next;
 }					t_stack;
 
 typedef struct s_superstack
@@ -38,7 +41,7 @@ void				ft_lstadd_back(t_stack **stck, t_stack *novo);
 
 int					ft_lstsize(t_stack *stck);
 
-void    			ft_lstdelone(t_stack *stck, void (*del)(void *));
+void				ft_lstdelone(t_stack *stck, void (*del)(void *));
 
 t_stack				*ft_lstindex(int index, t_stack *stack);
 
@@ -62,8 +65,8 @@ void				print_stacks(t_stack *stck_a, t_stack *stck_b);
 
 void				mvmnts_tester(t_supsta *sup);
 
-void				check_same(int ac, t_stack *stck);
-
-void				error_input_check(int ac, char **av);
-
 bool				is_number(char number[]);
+
+t_supsta			*input_reader(int ac, char **av, t_supsta *sup);
+
+#endif

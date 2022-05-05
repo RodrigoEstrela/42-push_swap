@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/03 16:05:07 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:50:20 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,15 @@ void	print_stacks(t_stack *stck_a, t_stack *stck_b)
 	ft_printf("################\n");
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int	i = 0;
-	int	nb = 0;
-	t_supsta *sup;
-	
-	error_input_check(ac, av);	
+	t_supsta	*sup;
+
 	sup = malloc(sizeof(t_supsta));
-	ft_printf("ac: %d\n", ac);
-	i = 0;
-	while (++i < ac)
-	{
-		nb = ft_atoi(av[i]);
-		ft_lstadd_back(&sup->a, ft_lstnew(nb));
-	}
-	check_same(ac, sup->a);
-//	mvmnts_tester(sup);
+	if (!sup)
+		exit(0);
+	sup = input_reader(ac, av, sup);
+	print_stacks(sup->a, sup->b);
+	mvmnts_tester(sup);
 	exit(0);
 }

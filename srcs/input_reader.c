@@ -6,56 +6,85 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/03 16:15:42 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:50:00 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
+static void	error_message(void)
+{
+	ft_printf("Error\n");
+	exit(0);
+}
 
-void	check_same(int ac, t_stack *stck)
+static void	check_same(t_stack *stck)
 {
 	int	i;
-	int	hold;
+	int	j;
 
 	i = 0;
-	hold = stck[0].cnt;
-	// add loop para ir passando o hold de sitio
-	while (i++ < ac - 2)
+	j = 1;
+	while (i < ft_lstsize(stck) - 1)
 	{
-		if (hold == stck[i].cnt)
+		while (j < ft_lstsize(stck))
 		{
-			ft_printf("Error\n");
-			exit(0);
+			if (ft_lstindex(i, stck)->cnt == ft_lstindex(j, stck)->cnt)
+				error_message();
+			j++;
 		}
+		i++;
+		j = i + 1;
 	}
 	return ;
 }
 
-void	error_input_check(int ac, char **av)
+static void	error_input_check(int ac, char **av)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**inp;
 
-	i = 0;
+	i = 1;
+	j = 0;
 	if (ac < 2)
 		exit(0);
-	while(++i < ac)
+	while (i < ac)
 	{
-		if (!is_number(av[i]))
+		inp = ft_split(av[i], 32);
+		while (inp[j])
 		{
-			ft_printf("Error\n");
-			exit(0);
+			if (!is_number(inp[j]) || ft_atoi(inp[j]) == ft_atoi("-"))
+				error_message();
+			else if (ft_atoi(inp[j]) > INT_MAX || ft_atoi(inp[j]) < INT_MIN)
+				error_message();
+			j++;
 		}
-		else if (!(ft_atoi(av[i]) <= INT_MAX && ft_atoi(av[i]) >= INT_MIN))
-		{
-			ft_printf("Error\n");
-			exit(0);
-		}
+		j = 0;
+		i++;
 	}
 }
 
-/*t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
+t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 {
-	error_input_check(ac, av);
+	int		i;
+	int		j;
+	char	**inputs;
 
-}*/
+	i = 1;
+	j = 0;
+	error_input_check(ac, av);
+	while (i < ac)
+	{
+		inputs = ft_split(av[i], 32);
+		while (inputs[j])
+		{
+			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[j])));
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	check_same(sup->a);
+	return (sup);
+}
