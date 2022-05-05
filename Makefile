@@ -6,11 +6,11 @@
 #    By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 15:56:17 by rdas-nev          #+#    #+#              #
-#    Updated: 2022/05/04 15:12:00 by rdas-nev         ###   ########.fr        #
+#    Updated: 2022/05/05 15:00:31 by rdas-nev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= error_check.c ft_printf.c ft_putstr.c ft_atoi.c ft_putunsigned.c \
+SRCS	= ft_printf.c ft_putstr.c ft_atoi.c ft_putunsigned.c \
 		  ft_bzero.c ft_putchar.c ft_strlen.c pushes.c ft_calloc.c ft_puthex.c \
 		  ft_strupper.c ft_itoa.c ft_putptr.c ft_uitoa.c rotates.c mvmnts_tester.c \
 		  ft_memset.c ft_putsigned.c swaps.c main.c ft_lstnew.c ft_lstadd_back.c \
