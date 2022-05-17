@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/05 12:50:00 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:58:19 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	error_input_check(int ac, char **av)
 		inp = ft_split(av[i], 32);
 		while (inp[j])
 		{
-			if (!is_number(inp[j]) || ft_atoi(inp[j]) == ft_atoi("-"))
+			if (!is_number(inp[j]))
 				error_message();
 			else if (ft_atoi(inp[j]) > INT_MAX || ft_atoi(inp[j]) < INT_MIN)
 				error_message();
@@ -73,6 +73,7 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 
 	i = 1;
 	j = 0;
+	sup->elenum = 1;
 	error_input_check(ac, av);
 	while (i < ac)
 	{
@@ -81,10 +82,28 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 		{
 			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[j])));
 			j++;
+			sup->elenum++;
 		}
 		j = 0;
 		i++;
 	}
+	sup->elenum--;
 	check_same(sup->a);
 	return (sup);
+}
+
+int	*input_to_arr(int *arr, t_supsta *sup)
+{
+	t_stack *tmp;
+	int	i;
+	
+	tmp = sup->a;
+	i = 0;
+	while(tmp)
+	{
+		arr[i] = tmp->cnt;
+		tmp = tmp->next;
+		i++;
+	}
+	return (arr);
 }

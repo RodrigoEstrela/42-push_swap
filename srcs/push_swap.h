@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/05 13:55:55 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:58:58 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include<stdio.h>
 # include<stdlib.h>
 # include<stdbool.h>
+# include<time.h>
 
 typedef struct s_stacks
 {
@@ -29,7 +30,28 @@ typedef struct s_superstack
 {
 	t_stack			*a;
 	t_stack			*b;
+	int				ctr;
+	int				elenum;
 }					t_supsta;
+
+typedef struct s_minmax
+{
+	int				min;
+	int				max;
+}				t_tao_facil;
+
+typedef struct s_lis
+{
+	int				val;
+	int				len;
+	struct s_lis	*next;
+}					t_lis;
+
+typedef struct s_superlis
+{
+	t_lis			*p;
+	t_lis			*n;
+}					t_superlis;
 
 t_stack				*ft_lstlast(t_stack *stck);
 
@@ -68,5 +90,13 @@ void				mvmnts_tester(t_supsta *sup);
 bool				is_number(char number[]);
 
 t_supsta			*input_reader(int ac, char **av, t_supsta *sup);
+
+int					*input_to_arr(int *arr, t_supsta *sup);
+
+void				notlis_gob(t_supsta *sup, int *arr);
+
+void    putinrightplace(t_supsta *sup);
+
+t_stack				*ft_lastindex(t_stack *stack);
 
 #endif
