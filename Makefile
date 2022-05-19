@@ -6,7 +6,7 @@
 #    By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 15:56:17 by rdas-nev          #+#    #+#              #
-#    Updated: 2022/05/16 11:51:22 by rdas-nev         ###   ########.fr        #
+#    Updated: 2022/05/19 10:58:03 by rdas-nev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ NC		= \033[0;0m
 all:		$(NAME)
 
 objs/%.o: srcs/%.c
-			@$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+			@$(CC) -Wall -Wextra -Werror -g -c $< -o $@
 
 $(NAME): 	$(OBJS)
 			@cc $(OBJS) -g -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/17 16:58:58 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:36:01 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 typedef struct s_stacks
 {
 	int				cnt;
+	int				len;
+	int				lislen;
 	struct s_stacks	*next;
 }					t_stack;
 
@@ -39,19 +41,6 @@ typedef struct s_minmax
 	int				min;
 	int				max;
 }				t_tao_facil;
-
-typedef struct s_lis
-{
-	int				val;
-	int				len;
-	struct s_lis	*next;
-}					t_lis;
-
-typedef struct s_superlis
-{
-	t_lis			*p;
-	t_lis			*n;
-}					t_superlis;
 
 t_stack				*ft_lstlast(t_stack *stck);
 
@@ -95,8 +84,12 @@ int					*input_to_arr(int *arr, t_supsta *sup);
 
 void				notlis_gob(t_supsta *sup, int *arr);
 
-void    putinrightplace(t_supsta *sup);
+void    			putinrightplace(t_supsta *sup);
 
 t_stack				*ft_lastindex(t_stack *stack);
+
+int					calc_max(t_stack *stack, int max);
+
+t_stack 			*putminonstart(t_stack *stack);
 
 #endif

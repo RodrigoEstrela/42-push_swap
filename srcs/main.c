@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/17 17:08:41 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:47:55 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,34 @@ int	calc_min(t_stack *stack)
 	return (min);
 }
 
+int	calc_max(t_stack *stack, int max)
+{
+	t_stack	*tmp;
+	
+	tmp = stack;
+	max = tmp->cnt;
+	while (tmp)
+	{
+		if (max < tmp->cnt)
+			max = tmp->cnt;
+		tmp = tmp->next;
+	}	
+	return (max);
+}
+
 t_stack *putminonstart(t_stack *stack)
 {
 	int min;
 
 	min = calc_min(stack);
-	printf("min: %d\n\n", min);
 	while (stack->cnt != min)
 	{
 		stack = rotater(stack);
+		ft_printf("ra\n");
 	}
 	return (stack);
 }
+
 int	check_same(int *lst, int rando, int max)
 {
 	int	i = -1;
@@ -68,7 +84,8 @@ int	check_same(int *lst, int rando, int max)
 			return (1);
 	return (0);
 }
-t_stack	*gen_gator(t_stack *a, char *size)
+
+t_supsta	*gen_gator(t_supsta *sup, char *size)
 {
 	int	i = -1;
 	int	nb = atoi(size);
@@ -82,10 +99,11 @@ t_stack	*gen_gator(t_stack *a, char *size)
 		while (check_same(lst, rando, i))
 			rando = rand()%1000;
 		lst[i] = rando;
-		ft_lstadd_back(&a, ft_lstnew(rando));
+		ft_lstadd_back(&sup->a, ft_lstnew(rando));
 	}
-	return (a);
+	return (sup);
 }
+
 int	main(int ac, char **av)
 {
 	t_supsta	*sup;
@@ -94,12 +112,10 @@ int	main(int ac, char **av)
 	sup = malloc(sizeof(t_supsta));
 	if (!sup)
 		exit(0);
-//	sup = input_reader(ac, av, sup);
-	sup->a = gen_gator(sup->a, av[1]);
-	sup->b = malloc(sizeof(t_stack));
-	print_stacks(sup->a, sup->b);
+	sup = input_reader(ac, av, sup);
+//	sup = gen_gator(sup, av[1]);
+//	print_stacks(sup->a, sup->b);
 	sup->a = putminonstart(sup->a);
-	print_stacks(sup->a, sup->b);
 
 	int *arr;
 	int	i = 0;
@@ -109,11 +125,9 @@ int	main(int ac, char **av)
 		i++;
 	notlis_gob(sup, arr);
 	while (sup->b)
-	{
 		putinrightplace(sup);
-	}
-	print_stacks(sup->a, sup->b);
 	sup->a = putminonstart(sup->a);
-	print_stacks(sup->a, sup->b);
+	ft_printf("\n\n");
+	//print_stacks(sup->a, sup->b);
 	exit(0);
 }
