@@ -59,12 +59,8 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 	ft_printf("checkneg: %d\nlislen: %d\n", checkneg, p->lislen);
 	if (checkneg == len - 1)
 		p->lislen--;
-
-
-	meter se a lis acabar em negativo e existir 0 na stack mandar o lis inventado da lis com o crl
-
-
-
+	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
+		p->lislen--;
 	return (p);
 }
 
