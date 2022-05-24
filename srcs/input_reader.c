@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/17 16:58:19 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:15:06 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 	}
 	sup->elenum--;
 	check_same(sup->a);
+	if (sup->elenum == 1)
+		exit(0);
 	return (sup);
 }
 

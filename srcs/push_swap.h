@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/19 14:36:01 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:20:45 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ typedef struct s_minmax
 	int				min;
 	int				max;
 }				t_tao_facil;
+
+typedef struct s_commands
+{
+	int				rot_a;
+	int				rot_b;
+}					t_calccom;
+
+
+typedef struct s_jeitoparaler
+{
+	int				i;
+	int				e;
+	int			  	rev_e;
+	int				rec;
+	int				max;
+	int				initval;
+}					t_buejeitodeseler;
 
 t_stack				*ft_lstlast(t_stack *stck);
 
@@ -84,12 +101,16 @@ int					*input_to_arr(int *arr, t_supsta *sup);
 
 void				notlis_gob(t_supsta *sup, int *arr);
 
-void    			putinrightplace(t_supsta *sup);
+void    			putinrightplace(t_supsta *supi, t_calccom *fds);
 
 t_stack				*ft_lastindex(t_stack *stack);
 
 int					calc_max(t_stack *stack, int max);
 
-t_stack 			*putminonstart(t_stack *stack);
+t_stack 			*putminonstart(t_stack *stack, int size);
+
+t_calccom			*get_fastest_nb(t_supsta *sup, t_calccom *cmds);
+
+int					calc_min(t_stack *stack, int min);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/19 14:47:55 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:59:58 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void	print_stacks(t_stack *stck_a, t_stack *stck_b)
 	ft_printf("################\n");
 }
 
-int	calc_min(t_stack *stack)
+int	calc_min(t_stack *stack, int min)
 {
 	t_stack	*tmp;
-	int min;
 	
 	tmp = stack;
-	min = tmp->cnt;
 	while (tmp)
 	{
 		if (min > tmp->cnt)
@@ -47,7 +45,6 @@ int	calc_min(t_stack *stack)
 	}	
 	return (min);
 }
-
 int	calc_max(t_stack *stack, int max)
 {
 	t_stack	*tmp;
@@ -63,16 +60,41 @@ int	calc_max(t_stack *stack, int max)
 	return (max);
 }
 
-t_stack *putminonstart(t_stack *stack)
+t_stack *putminonstart(t_stack *stack, int size)
 {
 	int min;
+	int i;
+	t_stack *tmp;
 
-	min = calc_min(stack);
-	while (stack->cnt != min)
+	printf("uaihdiuahfjwjrhhfj\n");
+	i = 0;
+	tmp = stack;
+	min = stack->cnt;
+	min = calc_min(stack, min);
+	while (tmp->cnt != min)
 	{
-		stack = rotater(stack);
-		ft_printf("ra\n");
+		i++;
+		tmp = tmp->next;
 	}
+	if (i <= size / 2)
+	{	
+		while (i > 0)
+		{
+			stack = rotater(stack);
+			ft_printf("ra\n");
+			i--;
+		}
+		print_stacks(stack, stack);
+		return (stack);
+	}
+	int a = size - i;	
+	while (a > 0)
+	{
+		stack = reverse_rotater(stack);
+		ft_printf("rra\n");
+		a--;
+	}
+	print_stacks(stack, stack);
 	return (stack);
 }
 
@@ -85,21 +107,28 @@ int	check_same(int *lst, int rando, int max)
 	return (0);
 }
 
-t_supsta	*gen_gator(t_supsta *sup, char *size)
+t_supsta	*gen_gator(t_supsta *sup, char *size, char *big)
 {
 	int	i = -1;
 	int	nb = atoi(size);
+	int	cap = atoi(big);
 	int	max = nb;
 	int	rando = 0;
+	int	sign;
 	int	lst[nb];
+	sup->elenum = 0;
 	srand(time(0));
 	while (++i < max)
 	{
-		rando = rand()%1000;
+		sign = rand()%2;
+		if (sign == 0)
+			sign = -1;
+		rando = rand()%cap * sign;
 		while (check_same(lst, rando, i))
-			rando = rand()%1000;
+			rando = rand()%cap * sign;
 		lst[i] = rando;
 		ft_lstadd_back(&sup->a, ft_lstnew(rando));
+		sup->elenum++;
 	}
 	return (sup);
 }
@@ -108,26 +137,41 @@ int	main(int ac, char **av)
 {
 	t_supsta	*sup;
 	
-	(void)ac;
+//	(void)ac;
 	sup = malloc(sizeof(t_supsta));
 	if (!sup)
 		exit(0);
 	sup = input_reader(ac, av, sup);
-//	sup = gen_gator(sup, av[1]);
-//	print_stacks(sup->a, sup->b);
-	sup->a = putminonstart(sup->a);
+//	sup = gen_gator(sup, av[1], av[2]);
+	print_stacks(sup->a, sup->b);
+	if (sup->elenum == 2)
+	{
+		if (sup->a->next->cnt < sup->a->cnt)
+		{
+			swap(sup->a);
+			ft_printf("sa\n");
+		}
+		exit(0);
+	}
+	sup->a = putminonstart(sup->a, sup->elenum);
 
 	int *arr;
-	int	i = 0;
 	arr = malloc(sizeof(int) * sup->elenum);
 	input_to_arr(arr, sup);
-	while (i < sup->elenum)
-		i++;
+//	print_stacks(sup->a, sup->b);
 	notlis_gob(sup, arr);
-	while (sup->b)
-		putinrightplace(sup);
-	sup->a = putminonstart(sup->a);
-	ft_printf("\n\n");
-	//print_stacks(sup->a, sup->b);
+
+	t_calccom	*fds;
+
+	fds = (t_calccom *)malloc(sizeof(t_calccom));
+//	print_stacks(sup->a, sup->b);
+	while (sup->b != NULL)
+	{
+		fds = get_fastest_nb(sup, fds);
+		putinrightplace(sup, fds);
+	}
+	
+	sup->a = putminonstart(sup->a, sup->elenum);
+	print_stacks(sup->a, sup->b);
 	exit(0);
 }
