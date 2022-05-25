@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/24 17:59:58 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:43:23 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_stack *putminonstart(t_stack *stack, int size)
 	int i;
 	t_stack *tmp;
 
-	printf("uaihdiuahfjwjrhhfj\n");
 	i = 0;
 	tmp = stack;
 	min = stack->cnt;
@@ -84,7 +83,6 @@ t_stack *putminonstart(t_stack *stack, int size)
 			ft_printf("ra\n");
 			i--;
 		}
-		print_stacks(stack, stack);
 		return (stack);
 	}
 	int a = size - i;	
@@ -94,10 +92,43 @@ t_stack *putminonstart(t_stack *stack, int size)
 		ft_printf("rra\n");
 		a--;
 	}
-	print_stacks(stack, stack);
 	return (stack);
 }
 
+t_stack *putmaxonstart(t_stack *stack, int size)
+{
+	int max;
+	int i;
+	t_stack *tmp;
+
+	i = 0;
+	tmp = stack;
+	max = stack->cnt;
+	max = calc_max(stack, max);
+	while (tmp->cnt != max)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	if (i <= size / 2)
+	{	
+		while (i > 0)
+		{
+			stack = rotater(stack);
+			ft_printf("ra\n");
+			i--;
+		}
+		return (stack);
+	}
+	int a = size - i;	
+	while (a > 0)
+	{
+		stack = reverse_rotater(stack);
+		ft_printf("rra\n");
+		a--;
+	}
+	return (stack);
+}
 int	check_same(int *lst, int rando, int max)
 {
 	int	i = -1;
@@ -132,6 +163,62 @@ t_supsta	*gen_gator(t_supsta *sup, char *size, char *big)
 	}
 	return (sup);
 }
+t_stack	*only_three(t_stack *stack)
+{
+	int min;
+
+	min = stack->cnt;
+	min = calc_min(stack, min);
+	if (ft_lstindex(0, stack)->cnt == min)
+	{
+		stack = rotater(stack);
+		ft_printf("ra\n");
+	}
+	else if (ft_lstindex(1, stack)->cnt == min)
+	{
+		stack = reverse_rotater(stack);
+		ft_printf("rra\n");
+	}
+
+	if (ft_lstindex(0, stack)->cnt > ft_lstindex(1, stack)->cnt)
+	{
+		swap(stack);
+		ft_printf("sa\n");
+		stack = reverse_rotater(stack);
+		ft_printf("rra\n");
+		return (stack);
+	}
+	stack = reverse_rotater(stack);
+	ft_printf("rra\n");
+	return (stack);
+}
+void	only_four(t_supsta *sup)
+{
+	sup->a = putmaxonstart(sup->a, sup->elenum);
+	sup = pb(sup);
+	ft_printf("pb\n");
+	sup->a = only_three(sup->a);
+	sup = pa(sup);
+	sup->a = rotater(sup->a);
+	ft_printf("pa\n");
+	ft_printf("ra\n");
+}
+void	only_five(t_supsta *sup)
+{
+	sup->a = putmaxonstart(sup->a, sup->elenum);
+	sup = pb(sup);
+	ft_printf("pb\n");
+	sup->a = putminonstart(sup->a, sup->elenum -1);
+	sup = pb(sup);
+	ft_printf("pb\n");
+	sup->a = only_three(sup->a);
+	sup = pa(sup);
+	sup = pa(sup);
+	sup->a = rotater(sup->a);
+	ft_printf("pa\n");
+	ft_printf("pa\n");
+	ft_printf("ra\n");
+}
 
 int	main(int ac, char **av)
 {
@@ -143,7 +230,8 @@ int	main(int ac, char **av)
 		exit(0);
 	sup = input_reader(ac, av, sup);
 //	sup = gen_gator(sup, av[1], av[2]);
-	print_stacks(sup->a, sup->b);
+//	print_stacks(sup->a, sup->b);
+//	printf("elenum: %d\n", sup->elenum);
 	if (sup->elenum == 2)
 	{
 		if (sup->a->next->cnt < sup->a->cnt)
@@ -153,6 +241,23 @@ int	main(int ac, char **av)
 		}
 		exit(0);
 	}
+	if (sup->elenum == 3)
+	{
+		only_three(sup->a);
+		exit(0);
+	}
+	if (sup->elenum == 4)
+	{
+		only_four(sup);
+		exit(0);
+	}
+	if (sup->elenum == 5)
+	{
+		only_five(sup);
+//		print_stacks(sup->a, sup->b);
+		exit(0);
+	}
+
 	sup->a = putminonstart(sup->a, sup->elenum);
 
 	int *arr;
@@ -172,6 +277,6 @@ int	main(int ac, char **av)
 	}
 	
 	sup->a = putminonstart(sup->a, sup->elenum);
-	print_stacks(sup->a, sup->b);
+//	print_stacks(sup->a, sup->b);
 	exit(0);
 }

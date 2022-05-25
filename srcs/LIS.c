@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/24 17:59:56 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:06:17 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 		fds = fds->next;
 		
 	}
-	printf("dakfjhiokjl nwrgiuoier;tgkjmelktjhgtk\n");
-	print_stacks(p,p);
-	ft_printf("checkneg: %d\nlislen: %d\n", checkneg, p->lislen);
 	if (checkneg == len - 1)
 		p->lislen--;
 	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
@@ -115,8 +112,6 @@ void	notlis_gob(t_supsta *sup, int *arr_lst)
 		}
 		e = -1;
 	}
-	printf("dajwdmne gjekrfm ehjla .efhentgj n\n");
-	print_stacks(sup->a, sup->b);
 }
 
 void	putinrightplace(t_supsta *sup, t_calccom   *fds)
