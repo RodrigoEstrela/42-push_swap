@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/24 17:15:06 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:43:14 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 
 int	*input_to_arr(int *arr, t_supsta *sup)
 {
-	t_stack *tmp;
-	int	i;
-	
+	t_stack	*tmp;
+	int		i;
+
 	tmp = sup->a;
 	i = 0;
-	while(tmp)
+	while (tmp)
 	{
 		arr[i] = tmp->cnt;
 		tmp = tmp->next;

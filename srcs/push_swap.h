@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/24 14:20:45 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:33:26 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void				notlis_gob(t_supsta *sup, int *arr);
 
 void    			putinrightplace(t_supsta *supi, t_calccom *fds);
 
-t_stack				*ft_lastindex(t_stack *stack);
+t_stack				*l_indx(t_stack *stack);
 
 int					calc_max(t_stack *stack, int max);
 
@@ -113,4 +113,7 @@ t_calccom			*get_fastest_nb(t_supsta *sup, t_calccom *cmds);
 
 int					calc_min(t_stack *stack, int min);
 
+void				hardcoded(t_supsta *sup);
+
+t_stack				*putmaxonstart(t_stack *stack, int size);
 #endif

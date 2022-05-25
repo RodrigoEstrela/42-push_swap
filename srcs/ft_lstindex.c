@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:02:09 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/18 11:01:02 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:17:55 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_stack	*ft_lstindex(int index, t_stack *stack)
 	return (ret);
 }
 
-t_stack *ft_lastindex(t_stack *stack)
+t_stack	*l_indx(t_stack *stack)
 {
-	t_stack *ret;
-	
+	t_stack	*ret;
+
 	ret = stack;
-	while(ret->next)
+	while (ret->next)
 		ret = ret->next;
 	return (ret);
 }
