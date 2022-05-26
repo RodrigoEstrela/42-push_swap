@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/25 15:43:14 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 12:32:09 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	error_input_check(int ac, char **av)
 		exit(0);
 	while (i < ac)
 	{
-		inp = ft_split(av[i], 32);
+		inp = malloc(strcount(av[i], 32) * sizeof(char *) + 1);
+		inp = ft_split(av[i], 32, inp);
 		while (inp[j])
 		{
 			if (!is_number(inp[j]))
@@ -60,6 +61,7 @@ static void	error_input_check(int ac, char **av)
 				error_message();
 			j++;
 		}
+		free(inp);
 		j = 0;
 		i++;
 	}
@@ -67,25 +69,24 @@ static void	error_input_check(int ac, char **av)
 
 t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 {
-	int		i;
-	int		j;
+	int		*i_j;
 	char	**inputs;
 
-	i = 1;
-	j = 0;
-	sup->elenum = 1;
+	i_j = (int [2]){1, 0};
 	error_input_check(ac, av);
-	while (i < ac)
+	while (i_j[0] < ac)
 	{
-		inputs = ft_split(av[i], 32);
-		while (inputs[j])
+		inputs = malloc(strcount(av[i_j[0]], 32) * sizeof(char *) + 1);
+		inputs = ft_split(av[i_j[0]], 32, inputs);
+		while (inputs[i_j[1]])
 		{
-			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[j])));
-			j++;
+			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[i_j[1]])));
+			i_j[1]++;
 			sup->elenum++;
 		}
-		j = 0;
-		i++;
+		free(inputs);
+		i_j[1] = 0;
+		i_j[0]++;
 	}
 	sup->elenum--;
 	check_same(sup->a);

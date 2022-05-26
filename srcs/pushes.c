@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:41:23 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/18 11:10:31 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:09:35 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_supsta	*pa(t_supsta *sup)
 	sup->b->next = sup->a;
 	sup->a = sup->b;
 	sup->b = tmp;
+	ft_printf("pa\n");
 	return (sup);
 }
 
@@ -35,5 +36,6 @@ t_supsta	*pb(t_supsta *sup)
 	sup->a->next = sup->b;
 	sup->b = sup->a;
 	sup->a = tmp;
+	ft_printf("pb\n");
 	return (sup);
 }

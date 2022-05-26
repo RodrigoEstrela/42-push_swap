@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/25 16:33:26 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:22:49 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,33 @@ typedef struct s_commands
 	int				rot_b;
 }					t_calccom;
 
-
 typedef struct s_jeitoparaler
 {
 	int				i;
 	int				e;
-	int			  	rev_e;
+	int				rev_e;
 	int				rec;
 	int				max;
 	int				initval;
-}					t_buejeitodeseler;
+}					t_buejeitodiler;
+
+typedef struct s_coisoetal
+{
+	t_stack			*p;
+	int				*arr_lis;
+	int				*e_i;
+	int				lst_size;
+	int				fds;
+}					t_cenas;
+
+typedef struct s_grandistruckmodenga
+{
+	t_buejeitodiler	*d;
+	int				f;
+	int				size;
+	t_supsta		*t;
+	t_supsta		*temp2;
+}					t_bxd_tc404;
 
 t_stack				*ft_lstlast(t_stack *stck);
 
@@ -101,13 +118,13 @@ int					*input_to_arr(int *arr, t_supsta *sup);
 
 void				notlis_gob(t_supsta *sup, int *arr);
 
-void    			putinrightplace(t_supsta *supi, t_calccom *fds);
+void				putinrightplace(t_supsta *supi, t_calccom *fds);
 
-t_stack				*l_indx(t_stack *stack);
+t_stack				*l(t_stack *stack);
 
 int					calc_max(t_stack *stack, int max);
 
-t_stack 			*putminonstart(t_stack *stack, int size);
+t_stack				*putminonstart(t_stack *stack, int size);
 
 t_calccom			*get_fastest_nb(t_supsta *sup, t_calccom *cmds);
 
@@ -116,4 +133,9 @@ int					calc_min(t_stack *stack, int min);
 void				hardcoded(t_supsta *sup);
 
 t_stack				*putmaxonstart(t_stack *stack, int size);
+
+int					calc_e(t_stack *a, int e);
+
+t_stack				*putminonposition(t_stack *stack, int init);
+
 #endif

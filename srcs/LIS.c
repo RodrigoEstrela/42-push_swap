@@ -6,18 +6,39 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/25 16:20:29 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:40:27 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static int	checkneg(t_stack *p, int len)
+{
+	t_stack	*fds;
+	int		checkneg;
+
+	fds = ft_calloc(len, sizeof(*p));
+	fds = p;
+	checkneg = 0;
+	while (fds)
+	{
+		p->lislen += 1;
+		if (fds->cnt < 0)
+			checkneg++;
+		fds = fds->next;
+	}
+	if (checkneg == len - 1)
+		p->lislen--;
+	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
+		p->lislen--;
+	free(fds);
+	return (p->lislen);
+}
+
 static t_stack	*lis(int *v, int len, t_stack *p)
 {
 	int			i;
 	t_stack		*n;
-	t_stack		*fds;
-	int			checkneg;
 
 	p->lislen = 0;
 	i = -1;
@@ -37,25 +58,8 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 		}
 	}
 	p = n;
-	while (++i < len)
-		if (n[i].len > p->len)
-			p = n + i;
-	fds = ft_calloc(len, sizeof(*p));
-	fds = p;
-	checkneg = 0;
-	while (fds)
-	{
-		p->lislen += 1;
-		if (fds->cnt < 0)
-		{
-			checkneg++;
-		}
-		fds = fds->next;
-	}
-	if (checkneg == len - 1)
-		p->lislen--;
-	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
-		p->lislen--;
+	p->lislen = checkneg(p, len);
+	free(n);
 	return (p);
 }
 
@@ -66,159 +70,44 @@ static int	check_if_dif_nb(int a, int b)
 	return (0);
 }
 
-void	notlis_gob(t_supsta *sup, int *arr_lst)
+static void	nemsei(t_supsta *sup, t_cenas *c)
 {
-	t_stack	*p;
-	int		*arr_lis;
-	int		*e_i;
-	int		lst_size;
-	int		fds;
-
-	e_i = (int [2]){-1, 0};
-	lst_size = sup->elenum;
-	p = calloc(sizeof(*p), lst_size);
-	p = lis(arr_lst, lst_size, p);
-	fds = p->lislen;
-	arr_lis = (int *)malloc(sizeof(int) * fds);
-	if (p->lislen == sup->elenum)
-		exit(0);
-	while (p->next)
+	while (c->e_i[1]++ < c->lst_size)
 	{
-		arr_lis[e_i[1]] = p->cnt;
-		p = p->next;
-		e_i[1]++;
-	}
-	arr_lis[e_i[1]] = p->cnt;
-	e_i[1] = 0;
-	while (e_i[1]++ < lst_size)
-	{
-		while (++e_i[0] < fds)
-		{
-			if (!check_if_dif_nb(sup->a->cnt, arr_lis[e_i[0]]))
-			{
+		while (++c->e_i[0] < c->fds)
+			if (!check_if_dif_nb(sup->a->cnt, c->arr_lis[c->e_i[0]]))
 				break ;
-			}
-		}
-		if (e_i[0] == fds)
-		{
+		if (c->e_i[0] == c->fds)
 			sup = pb(sup);
-			ft_printf("pb\n");
-		}
 		else
 		{
 			sup->a = rotater(sup->a);
 			ft_printf("ra\n");
 		}
-		e_i[0] = -1;
+		c->e_i[0] = -1;
 	}
 }
 
-void	putinrightplace(t_supsta *sup, t_calccom *fds)
+void	notlis_gob(t_supsta *sup, int *arr_lst)
 {
-	int	a;
+	t_cenas	*c;
 
-	a = ft_lstsize(sup->a);
-	if (fds->rot_a < a / 2)
+	c = malloc(sizeof(t_cenas));
+	c->e_i = (int [2]){-1, 0};
+	c->lst_size = sup->elenum;
+	c->p = calloc(sizeof(*c->p), c->lst_size);
+	c->p = lis(arr_lst, c->lst_size, c->p);
+	c->fds = c->p->lislen;
+	c->arr_lis = (int *)malloc(sizeof(int) * c->fds);
+	if (c->p->lislen == sup->elenum)
+		exit(0);
+	while (c->p->next)
 	{
-		while (fds->rot_a && fds->rot_b)
-		{
-			sup = super_rotater(sup);
-			ft_printf("rr\n");
-			fds->rot_a--;
-			fds->rot_b--;
-		}
-		while (fds->rot_a)
-		{
-			sup->a = rotater(sup->a);
-			ft_printf("ra\n");
-			fds->rot_a--;
-		}
+		c->arr_lis[c->e_i[1]] = c->p->cnt;
+		c->p = c->p->next;
+		c->e_i[1]++;
 	}
-	else
-	{
-		while (a - fds->rot_a > 0)
-		{
-			sup->a = reverse_rotater(sup->a);
-			ft_printf("rra\n");
-			a--;
-		}
-	}
-	while (fds->rot_b)
-	{
-		sup->b = rotater(sup->b);
-		ft_printf("rb\n");
-		fds->rot_b--;
-	}
-	sup = pa(sup);
-	ft_printf("pa\n");
-}
-
-int	calc_e(t_stack *a, int e)
-{
-	int		min;
-	t_stack	*fds;
-
-	fds = a;
-	min = fds->cnt;
-	min = calc_min(fds, min);
-	while (fds->cnt != min)
-	{
-		fds = fds->next;
-		e++;
-	}
-	return (e);
-}
-
-t_stack	*putminonposition(t_stack *stack, int init)
-{
-	while (stack->cnt != init)
-		stack = rotater(stack);
-	return (stack);
-}
-
-t_calccom	*get_fastest_nb(t_supsta *sup, t_calccom *cmds)
-{
-	t_buejeitodeseler	*d;
-	int					flag;
-	int					size;
-	t_supsta			*t;
-	t_supsta			*temp2;
-
-	t = sup;
-	temp2 = sup;
-	d = malloc(sizeof(t_buejeitodeseler));
-	d->i = 0;
-	d->e = 0;
-	d->rec = 236746;
-	d->max = 0;
-	d->initval = t->a->cnt;
-	flag = 1;
-	size = ft_lstsize(sup->b);
-	d->max = calc_max(t->a, d->max);
-	while (d->i < size)
-	{
-		if (t->b->cnt > d->max)
-		{
-			d->e = calc_e(t->a, d->e);
-			flag = 0;
-		}
-		while ((t->a->cnt < t->b->cnt || l_indx(t->a)->cnt > t->b->cnt) && flag)
-		{
-			t->a = rotater(t->a);
-			d->e++;
-		}
-		if (d->rec > d->e + d->i)
-		{
-			cmds->rot_a = d->e;
-			d->rec = d->e + d->i;
-			cmds->rot_b = d->i;
-		}
-		flag = 1;
-		d->i++;
-		d->e = 0;
-		t->a = putminonposition(t->a, d->initval);
-		temp2->a = putminonposition(temp2->a, d->initval);
-		t->b = rotater(t->b);
-	}
-	return (cmds);
+	c->arr_lis[c->e_i[1]] = c->p->cnt;
+	c->e_i[1] = 0;
+	nemsei(sup, c);
 }

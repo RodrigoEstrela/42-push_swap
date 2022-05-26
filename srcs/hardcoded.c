@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:25:00 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/25 16:27:43 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:10:31 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_stack	*only_three(t_stack *stack)
 {
-	int min;
+	int	min;
 
 	min = stack->cnt;
 	min = calc_min(stack, min);
@@ -28,7 +28,6 @@ static t_stack	*only_three(t_stack *stack)
 		stack = reverse_rotater(stack);
 		ft_printf("rra\n");
 	}
-
 	if (ft_lstindex(0, stack)->cnt > ft_lstindex(1, stack)->cnt)
 	{
 		swap(stack);
@@ -46,11 +45,9 @@ static void	only_four(t_supsta *sup)
 {
 	sup->a = putmaxonstart(sup->a, sup->elenum);
 	sup = pb(sup);
-	ft_printf("pb\n");
 	sup->a = only_three(sup->a);
 	sup = pa(sup);
 	sup->a = rotater(sup->a);
-	ft_printf("pa\n");
 	ft_printf("ra\n");
 }
 
@@ -58,16 +55,12 @@ static void	only_five(t_supsta *sup)
 {
 	sup->a = putmaxonstart(sup->a, sup->elenum);
 	sup = pb(sup);
-	ft_printf("pb\n");
 	sup->a = putminonstart(sup->a, sup->elenum -1);
 	sup = pb(sup);
-	ft_printf("pb\n");
 	sup->a = only_three(sup->a);
 	sup = pa(sup);
 	sup = pa(sup);
 	sup->a = rotater(sup->a);
-	ft_printf("pa\n");
-	ft_printf("pa\n");
 	ft_printf("ra\n");
 }
 
