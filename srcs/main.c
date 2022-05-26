@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 12:28:01 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:29:55 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ int	main(int ac, char **av)
 	arr = malloc(sizeof(int) * sup->elenum);
 	input_to_arr(arr, sup);
 	notlis_gob(sup, arr);
+	free(arr);
 	cmds = (t_calccom *)malloc(sizeof(t_calccom));
 	while (sup->b != NULL)
 	{
 		cmds = get_fastest_nb(sup, cmds);
 		putinrightplace(sup, cmds);
 	}
+	free(cmds);
 	sup->a = putminonstart(sup->a, sup->elenum);
+	free(sup);
 	exit(0);
 }

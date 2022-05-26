@@ -6,11 +6,32 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 16:25:00 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 13:10:31 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:31:02 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
+
+static	void	checkorganized(t_stack	*stack)
+{
+	int		i;
+	t_stack	*tmp;
+	int		size;
+
+	i = 1;
+	tmp = stack;
+	size = ft_lstsize(tmp);
+	while (tmp->next)
+	{
+		if (tmp->cnt < tmp->next->cnt)
+			i++;
+		tmp = tmp->next;
+	}
+	if (i == size)
+		exit(0);
+	else
+		return ;
+}
 
 static t_stack	*only_three(t_stack *stack)
 {
@@ -43,6 +64,7 @@ static t_stack	*only_three(t_stack *stack)
 
 static void	only_four(t_supsta *sup)
 {
+	checkorganized(sup->a);
 	sup->a = putmaxonstart(sup->a, sup->elenum);
 	sup = pb(sup);
 	sup->a = only_three(sup->a);
@@ -53,6 +75,7 @@ static void	only_four(t_supsta *sup)
 
 static void	only_five(t_supsta *sup)
 {
+	checkorganized(sup->a);
 	sup->a = putmaxonstart(sup->a, sup->elenum);
 	sup = pb(sup);
 	sup->a = putminonstart(sup->a, sup->elenum -1);
@@ -77,6 +100,7 @@ void	hardcoded(t_supsta *sup)
 	}
 	if (sup->elenum == 3)
 	{
+		checkorganized(sup->a);
 		only_three(sup->a);
 		exit(0);
 	}
