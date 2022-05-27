@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:18:43 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 14:20:04 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:16:40 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_bxd_tc404	*a_initializer(t_bxd_tc404 *a, t_supsta *sup)
 {
 	a->t = sup;
 	a->temp2 = sup;
-	a->d = malloc(sizeof(t_buejeitodiler));
+	a->d = ft_calloc(sizeof(t_buejeitodiler), 1);
 	a->d->i = 0;
 	a->d->e = 0;
 	a->d->rec = 236746;
@@ -50,7 +50,7 @@ t_calccom	*get_fastest_nb(t_supsta *sup, t_calccom *cmds)
 {
 	t_bxd_tc404	*a;
 
-	a = malloc(sizeof(t_bxd_tc404));
+	a = ft_calloc(sizeof(t_bxd_tc404), 1);
 	a = a_initializer(a, sup);
 	while (a->d->i < a->size)
 	{
@@ -70,5 +70,7 @@ t_calccom	*get_fastest_nb(t_supsta *sup, t_calccom *cmds)
 		}
 		a = a_reseter(a);
 	}
+	free(a->d);
+	free(a);
 	return (cmds);
 }

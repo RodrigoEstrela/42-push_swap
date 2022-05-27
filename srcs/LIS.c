@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 13:40:27 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:17:37 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ void	notlis_gob(t_supsta *sup, int *arr_lst)
 {
 	t_cenas	*c;
 
-	c = malloc(sizeof(t_cenas));
+	c = ft_calloc(sizeof(t_cenas), 1);
 	c->e_i = (int [2]){-1, 0};
 	c->lst_size = sup->elenum;
 	c->p = calloc(sizeof(*c->p), c->lst_size);
 	c->p = lis(arr_lst, c->lst_size, c->p);
 	c->fds = c->p->lislen;
-	c->arr_lis = (int *)malloc(sizeof(int) * c->fds);
+	c->arr_lis = (int *)ft_calloc(sizeof(int), c->fds);
 	if (c->p->lislen == sup->elenum)
 		exit(0);
 	while (c->p->next)

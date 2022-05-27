@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 12:32:09 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 10:54:51 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	error_input_check(int ac, char **av)
 		exit(0);
 	while (i < ac)
 	{
-		inp = malloc(strcount(av[i], 32) * sizeof(char *) + 1);
+		inp = ft_calloc(strcount(av[i], 32), sizeof(char *) + 1);
 		inp = ft_split(av[i], 32, inp);
 		while (inp[j])
 		{
@@ -76,7 +76,7 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 	error_input_check(ac, av);
 	while (i_j[0] < ac)
 	{
-		inputs = malloc(strcount(av[i_j[0]], 32) * sizeof(char *) + 1);
+		inputs = ft_calloc(strcount(av[i_j[0]], 32), sizeof(char *) + 1);
 		inputs = ft_split(av[i_j[0]], 32, inputs);
 		while (inputs[i_j[1]])
 		{
@@ -92,6 +92,7 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 	check_same(sup->a);
 	if (sup->elenum == 1)
 		exit(0);
+	hardcoded(sup);
 	return (sup);
 }
 
