@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 10:55:40 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 13:13:30 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:25:58 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,29 @@ static char	**make_arrays(char **strarray, char *s, char c, int i)
 	return (strarray);
 }
 
-char	**ft_split(const char *s, char c, char **strarray)
+/*char	**ft_split(const char *s, char c)//, char **strarray)
 {
 	int		i;
 
 	i = 0;
 	if (!s)
 		return (NULL);
+	if (!strarray)
+		return (0);
+	strarray = make_arrays(strarray, (char *)s, c, i);
+	return (strarray);
+}*/
+
+char	**ft_split(const char *s, char c)
+{
+	char	**strarray;
+	int		i;
+
+	i = 0;
+	strarray = NULL;
+	if (!s)
+		return (NULL);
+	strarray = (char **)malloc(strcount((char *)s, c) * sizeof(char *) + 1);
 	if (!strarray)
 		return (0);
 	strarray = make_arrays(strarray, (char *)s, c, i);

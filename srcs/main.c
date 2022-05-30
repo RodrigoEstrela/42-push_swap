@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 16:03:02 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:45:45 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ int	main(int ac, char **av)
 	cmds = ft_calloc(sizeof(t_calccom), 1);
 	do_cmds_things(cmds, sup);
 	sup->a = putminonstart(sup->a, sup->elenum);
+//	print_stacks(sup->a, sup->b);
 	while (sup->a)
 	{
 		free(sup->a);
 		sup->a = sup->a->next;
 	}
 	free(sup);
+//	system("leaks push_swap");
 	exit(0);
 }
 // use system("leaks push_swap"); before exit to check mem leaks

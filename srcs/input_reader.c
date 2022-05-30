@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 16:01:49 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:01:35 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,57 +40,43 @@ static void	check_same(t_supsta *sup)
 	return ;
 }
 
-static void	error_input_check(int ac, char **av)
+void	error_input_check(int ac, char **av)
 {
 	int		i;
-	int		j;
-	char	**inp;
 
 	i = 1;
-	j = 0;
 	if (ac < 2)
 		exit(0);
+
 	while (i < ac)
 	{
-		inp = ft_calloc(strcount(av[i], 32), sizeof(**inp));
-		inp = ft_split(av[i], 32, inp);
-		while (inp[j])
-		{
-			if (!is_number(inp[j]))
-				error_message();
-			else if (ft_atoi(inp[j]) > INT_MAX || ft_atoi(inp[j]) < INT_MIN)
-				error_message();
-			free(inp[j]);
-			j++;
-		}
-		free(inp);
-		j = 0;
+		if (!is_number(av[i]))
+			error_message();
+		else if (ft_atoi(av[i]) > INT_MAX || ft_atoi(av[i]) < INT_MIN)	
+			error_message();
 		i++;
 	}
 }
 
 t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 {
-	int		*i_j;
-	char	**inputs;
+	int		i;
 
-	i_j = (int [2]){1, 0};
-	error_input_check(ac, av);
-	while (i_j[0] < ac)
+	i = 1;
+	if (ft_strchr(av[i], 32))
 	{
-		inputs = ft_calloc(strcount(av[i_j[0]], 32), sizeof(**inputs));
-		inputs = ft_split(av[i_j[0]], 32, inputs);
-		while (inputs[i_j[1]])
-		{
-			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[i_j[1]])));
-			free(inputs[i_j[1]]);
-			i_j[1]++;
-			sup->elenum++;
-		}
-		free(inputs);
-		i_j[1] = 0;
-		i_j[0]++;
+		ac = strcount(av[i], 32);
+		av = ft_split(av[i], 32);
+		i = 0;
 	}
+	error_input_check(ac, av);
+	while (i < ac)
+	{
+		ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(av[i])));
+		i++;
+		sup->elenum++;
+	}
+	i++;
 	check_same(sup);
 	if (sup->elenum == 1)
 		exit(0);

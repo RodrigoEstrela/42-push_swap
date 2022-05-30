@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:46:29 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 12:23:23 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:40:13 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char		*ft_itoa(int n);
 
 void		*ft_memset(void *b, int c, size_t len);
 
-char		**ft_split(const char *s, char c, char **strarray);
+char		**ft_split(const char *s, char c);//, char **strarray);
 
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 

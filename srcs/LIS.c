@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/30 12:28:28 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:49:12 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	checkneg(t_stack *p, int len)
 		p->lislen--;
 	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
 		p->lislen--;
+//	printf("%d\n", p->lislen);
 	return (p->lislen);
 }
 
@@ -40,7 +41,7 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 
 	p->lislen = 0;
 	i = -1;
-	n = p;//ft_calloc(len, sizeof(*n));
+	n = ft_calloc(len, sizeof(*n));
 	while (++i < len)
 		n[i].cnt = v[i];
 	while (i--)
@@ -89,24 +90,26 @@ void	notlis_gob(t_supsta *sup, int *arr_lst)
 {
 	t_cenas	*c;
 	t_stack	*p;
+	t_stack *l;
 
 	c = ft_calloc(sizeof(t_cenas), 1);
-	c->e_i = (int [2]){-1, 0};
+	c->e_i = (int [2]){-1, -1};
 	c->lst_size = sup->elenum;
 	p = malloc(sizeof(t_stack) * c->lst_size);
 	free(p);
 	p = lis(arr_lst, c->lst_size, p);
+	l = p;
 	c->fds = p->lislen;
 	c->arr_lis = (int *)ft_calloc(sizeof(int), c->fds);
 	if (p->lislen == sup->elenum)
 		exit(0);
-	while (c->e_i[1] < c->lst_size)
+	while (c->e_i[1] < c->fds)
 	{
-		c->arr_lis[c->e_i[1]] = p->cnt;
-		p = rotater(p);
+		c->arr_lis[c->e_i[1]] = l->cnt;
+		l = l->next;
 		c->e_i[1]++;
 	}
-	c->arr_lis[c->e_i[1]] = p->cnt;
+	c->arr_lis[c->e_i[1]] = l->cnt;
 	c->e_i[1] = 0;
 	nemsei(sup, c);
 	free(c->arr_lis);
