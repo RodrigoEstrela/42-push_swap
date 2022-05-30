@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:15:06 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 11:21:23 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:03:02 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	do_array_things(int *arr, t_supsta *sup)
 {
 	input_to_arr(arr, sup);
 	notlis_gob(sup, arr);
-	free(arr);
 }
 
 static void	do_cmds_things(t_calccom *cmds, t_supsta *sup)
@@ -54,7 +53,6 @@ static void	do_cmds_things(t_calccom *cmds, t_supsta *sup)
 		cmds = get_fastest_nb(sup, cmds);
 		putinrightplace(sup, cmds);
 	}
-	free(cmds);
 }
 
 int	main(int ac, char **av)
@@ -70,9 +68,15 @@ int	main(int ac, char **av)
 	cmds = ft_calloc(sizeof(t_calccom), 1);
 	do_cmds_things(cmds, sup);
 	sup->a = putminonstart(sup->a, sup->elenum);
+	while (sup->a)
+	{
+		free(sup->a);
+		sup->a = sup->a->next;
+	}
 	free(sup);
 	exit(0);
 }
+// use system("leaks push_swap"); before exit to check mem leaks
 // https://github.com/lmalki-h/push_swap_tester
 // git clone to root of pushswap dir
 // put checker from subject page on tester

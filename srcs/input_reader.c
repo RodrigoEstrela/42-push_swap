@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 10:54:51 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 16:01:49 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ static void	error_message(void)
 	exit(0);
 }
 
-static void	check_same(t_stack *stck)
+static void	check_same(t_supsta *sup)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 1;
-	while (i < ft_lstsize(stck) - 1)
+	sup->elenum--;
+	while (i < ft_lstsize(sup->a) - 1)
 	{
-		while (j < ft_lstsize(stck))
+		while (j < ft_lstsize(sup->a))
 		{
-			if (ft_lstindex(i, stck)->cnt == ft_lstindex(j, stck)->cnt)
+			if (ft_lstindex(i, sup->a)->cnt == ft_lstindex(j, sup->a)->cnt)
 				error_message();
 			j++;
 		}
@@ -51,7 +52,7 @@ static void	error_input_check(int ac, char **av)
 		exit(0);
 	while (i < ac)
 	{
-		inp = ft_calloc(strcount(av[i], 32), sizeof(char *) + 1);
+		inp = ft_calloc(strcount(av[i], 32), sizeof(**inp));
 		inp = ft_split(av[i], 32, inp);
 		while (inp[j])
 		{
@@ -59,6 +60,7 @@ static void	error_input_check(int ac, char **av)
 				error_message();
 			else if (ft_atoi(inp[j]) > INT_MAX || ft_atoi(inp[j]) < INT_MIN)
 				error_message();
+			free(inp[j]);
 			j++;
 		}
 		free(inp);
@@ -76,11 +78,12 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 	error_input_check(ac, av);
 	while (i_j[0] < ac)
 	{
-		inputs = ft_calloc(strcount(av[i_j[0]], 32), sizeof(char *) + 1);
+		inputs = ft_calloc(strcount(av[i_j[0]], 32), sizeof(**inputs));
 		inputs = ft_split(av[i_j[0]], 32, inputs);
 		while (inputs[i_j[1]])
 		{
 			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[i_j[1]])));
+			free(inputs[i_j[1]]);
 			i_j[1]++;
 			sup->elenum++;
 		}
@@ -88,8 +91,7 @@ t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 		i_j[1] = 0;
 		i_j[0]++;
 	}
-	sup->elenum--;
-	check_same(sup->a);
+	check_same(sup);
 	if (sup->elenum == 1)
 		exit(0);
 	hardcoded(sup);

@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:11:18 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 14:22:49 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:40:45 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_jeitoparaler
 
 typedef struct s_coisoetal
 {
-	t_stack			*p;
 	int				*arr_lis;
 	int				*e_i;
 	int				lst_size;

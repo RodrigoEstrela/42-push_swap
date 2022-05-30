@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 10:55:40 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/26 12:23:01 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 13:13:30 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static	char	*ft_strndup(const char *s1, int start, int end)
 	size_t	i;
 
 	i = 0;
-	str = (char *)malloc(sizeof(*s1) * (end - start + 1));
-	if (!str)
-		return (NULL);
+	str = (char *)ft_calloc(sizeof(*s1), (end - start + 1));
 	while (s1[start] && start < end)
 	{
 		str[i] = s1[start];
@@ -83,7 +81,6 @@ static char	**make_arrays(char **strarray, char *s, char c, int i)
 		i++;
 		end++;
 	}
-	strarray[i] = NULL;
 	return (strarray);
 }
 

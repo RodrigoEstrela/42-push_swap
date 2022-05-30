@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 11:17:37 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/30 12:28:28 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	checkneg(t_stack *p, int len)
 	t_stack	*fds;
 	int		checkneg;
 
-	fds = ft_calloc(len, sizeof(*p));
 	fds = p;
 	checkneg = 0;
 	while (fds)
@@ -31,7 +30,6 @@ static int	checkneg(t_stack *p, int len)
 		p->lislen--;
 	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
 		p->lislen--;
-	free(fds);
 	return (p->lislen);
 }
 
@@ -42,7 +40,7 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 
 	p->lislen = 0;
 	i = -1;
-	n = ft_calloc(len, sizeof(*n));
+	n = p;//ft_calloc(len, sizeof(*n));
 	while (++i < len)
 		n[i].cnt = v[i];
 	while (i--)
@@ -59,7 +57,6 @@ static t_stack	*lis(int *v, int len, t_stack *p)
 	}
 	p = n;
 	p->lislen = checkneg(p, len);
-	free(n);
 	return (p);
 }
 
@@ -91,23 +88,27 @@ static void	nemsei(t_supsta *sup, t_cenas *c)
 void	notlis_gob(t_supsta *sup, int *arr_lst)
 {
 	t_cenas	*c;
+	t_stack	*p;
 
 	c = ft_calloc(sizeof(t_cenas), 1);
 	c->e_i = (int [2]){-1, 0};
 	c->lst_size = sup->elenum;
-	c->p = calloc(sizeof(*c->p), c->lst_size);
-	c->p = lis(arr_lst, c->lst_size, c->p);
-	c->fds = c->p->lislen;
+	p = malloc(sizeof(t_stack) * c->lst_size);
+	free(p);
+	p = lis(arr_lst, c->lst_size, p);
+	c->fds = p->lislen;
 	c->arr_lis = (int *)ft_calloc(sizeof(int), c->fds);
-	if (c->p->lislen == sup->elenum)
+	if (p->lislen == sup->elenum)
 		exit(0);
-	while (c->p->next)
+	while (c->e_i[1] < c->lst_size)
 	{
-		c->arr_lis[c->e_i[1]] = c->p->cnt;
-		c->p = c->p->next;
+		c->arr_lis[c->e_i[1]] = p->cnt;
+		p = rotater(p);
 		c->e_i[1]++;
 	}
-	c->arr_lis[c->e_i[1]] = c->p->cnt;
+	c->arr_lis[c->e_i[1]] = p->cnt;
 	c->e_i[1] = 0;
 	nemsei(sup, c);
+	free(c->arr_lis);
+	free(c);
 }

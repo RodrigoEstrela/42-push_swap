@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 14:18:43 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/27 11:16:40 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:54:27 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_bxd_tc404	*a_initializer(t_bxd_tc404 *a, t_supsta *sup)
 {
 	a->t = sup;
 	a->temp2 = sup;
-	a->d = ft_calloc(sizeof(t_buejeitodiler), 1);
 	a->d->i = 0;
 	a->d->e = 0;
 	a->d->rec = 236746;
@@ -46,11 +45,18 @@ static	t_bxd_tc404	*epaya(t_bxd_tc404 *a)
 	return (a);
 }
 
+static	void	normi_ty(t_bxd_tc404 *a)
+{
+	free(a->d);
+	free(a);
+}
+
 t_calccom	*get_fastest_nb(t_supsta *sup, t_calccom *cmds)
 {
 	t_bxd_tc404	*a;
 
 	a = ft_calloc(sizeof(t_bxd_tc404), 1);
+	a->d = ft_calloc(sizeof(t_buejeitodiler), 1);
 	a = a_initializer(a, sup);
 	while (a->d->i < a->size)
 	{
@@ -70,7 +76,6 @@ t_calccom	*get_fastest_nb(t_supsta *sup, t_calccom *cmds)
 		}
 		a = a_reseter(a);
 	}
-	free(a->d);
-	free(a);
+	normi_ty(a);
 	return (cmds);
 }
