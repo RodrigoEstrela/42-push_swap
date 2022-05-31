@@ -6,22 +6,21 @@
 #    By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 15:56:17 by rdas-nev          #+#    #+#              #
-#    Updated: 2022/05/27 14:15:55 by rdas-nev         ###   ########.fr        #
+#    Updated: 2022/05/31 16:22:05 by rdas-nev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= ft_printf.c ft_putstr.c ft_atoi.c ft_putunsigned.c \
 		  ft_bzero.c ft_putchar.c ft_strlen.c pushes.c ft_calloc.c ft_puthex.c \
-		  ft_strupper.c ft_itoa.c ft_putptr.c ft_uitoa.c rotates.c \
+		  ft_strupper.c ft_itoa.c ft_putptr.c ft_uitoa.c rotates.c cmds.c \
 		  ft_memset.c ft_putsigned.c swaps.c main.c ft_lstnew.c ft_lstadd_back.c \
 		  ft_lstadd_front.c ft_lstlast.c ft_lstindex.c ft_lstsize.c ft_lstdelone.c \
 		  ft_isdigit.c input_reader.c ft_split.c LIS.c hardcoded.c max_min_positions.c \
-		  putinplace.c bxdcomtc404.c \
 
 
 OBJS	= $(addprefix objs/,$(SRCS:.c=.o))
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 RM		= rm -f
 
@@ -40,10 +39,10 @@ NC		= \033[0;0m
 all:		$(NAME)
 
 objs/%.o: srcs/%.c
-			@$(CC) -Wall -Wextra -Werror  -c $< -o $@
+			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): 	$(OBJS)
-			@cc $(OBJS) -g -o $(NAME)
+			@cc $(OBJS) $(CFLAGS) -o $(NAME)
 			@echo  "\n${YELLOW}A wild ${RED}push${GREEN}_${BLUE}swap ${YELLOW}appears in current dir...${NC}\n"
 
 clean:
