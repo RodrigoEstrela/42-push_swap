@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:46:29 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/30 13:40:13 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/31 12:56:04 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ char		*ft_itoa(int n);
 
 void		*ft_memset(void *b, int c, size_t len);
 
-char		**ft_split(const char *s, char c);//, char **strarray);
+char		**ft_split(const char *s, char c, char **strarray);
+
+int			strcount(char *s, char c);
 
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 
@@ -93,9 +95,28 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 char		*ft_strrchr(const char *s, int c);
 
+//void		ft_puthex(int nbr, char *base);
+
+//void		ft_putptr(void *ptr);
+
+//t_list		*ft_lstnew(void *content);
+
+//void		ft_lstadd_front(t_list **lst, t_list *new);
+
+//int			ft_lstsize(t_list *lst);
+
+//t_list		*ft_lstlast(t_list *lst);
+
+//void		ft_lstadd_back(t_list **lst, t_list *new);
+
+//void		ft_lstdelone(t_list *lst, void (*del)(void *));
+
+//void		ft_lstclear(t_list **lst, void (*del)(void *));
+
+//void		ft_lstiter(t_list *lst, void (*f)(void *));
+
 void		ft_putunbr_fd(unsigned int nb, int fd);
 
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-int			strcount(char *s, char c);
 #endif

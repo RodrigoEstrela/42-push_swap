@@ -6,11 +6,12 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:19:35 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/30 17:01:35 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:28:55 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
+#include "libft.h"
 
 static void	error_message(void)
 {
@@ -18,19 +19,18 @@ static void	error_message(void)
 	exit(0);
 }
 
-static void	check_same(t_supsta *sup)
+static void	check_same(t_stack *stck)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 1;
-	sup->elenum--;
-	while (i < ft_lstsize(sup->a) - 1)
+	while (i < ft_lstsize(stck) - 1)
 	{
-		while (j < ft_lstsize(sup->a))
+		while (j < ft_lstsize(stck))
 		{
-			if (ft_lstindex(i, sup->a)->cnt == ft_lstindex(j, sup->a)->cnt)
+			if (ft_lstindex(i, stck)->cnt == ft_lstindex(j, stck)->cnt)
 				error_message();
 			j++;
 		}
@@ -40,47 +40,60 @@ static void	check_same(t_supsta *sup)
 	return ;
 }
 
-void	error_input_check(int ac, char **av)
+static void	error_input_check(int ac, char **av)
 {
 	int		i;
+	int		j;
+	char	**inp;
 
 	i = 1;
+	j = 0;
 	if (ac < 2)
 		exit(0);
-
 	while (i < ac)
 	{
-		if (!is_number(av[i]))
-			error_message();
-		else if (ft_atoi(av[i]) > INT_MAX || ft_atoi(av[i]) < INT_MIN)	
-			error_message();
+		inp = (char **)malloc(strcount(av[i], 32) * (sizeof(char *) + 1));
+		inp = ft_split(av[i], 32, inp);
+		while (inp[j])
+		{
+			if (!is_number(inp[j]))
+				error_message();
+			else if (ft_atoi(inp[j]) > INT_MAX || ft_atoi(inp[j]) < INT_MIN)
+				error_message();
+			free(inp[j]);
+			j++;
+		}
+		j = 0;
 		i++;
+		free(inp);
 	}
 }
 
 t_supsta	*input_reader(int ac, char **av, t_supsta *sup)
 {
-	int		i;
+	int		*arr;
+	char	**inputs;
 
-	i = 1;
-	if (ft_strchr(av[i], 32))
-	{
-		ac = strcount(av[i], 32);
-		av = ft_split(av[i], 32);
-		i = 0;
-	}
+	arr = (int [2]){0, 0};
+	sup->elenum = 1;
 	error_input_check(ac, av);
-	while (i < ac)
+	while (++arr[0] < ac)
 	{
-		ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(av[i])));
-		i++;
-		sup->elenum++;
+		inputs = ft_calloc(strcount(av[arr[0]], 32), (sizeof(char *) + 1));
+		inputs = ft_split(av[arr[0]], 32, inputs);
+		while (inputs[arr[1]])
+		{
+			ft_lstadd_back(&sup->a, ft_lstnew(ft_atoi(inputs[arr[1]])));
+			free(inputs[arr[1]++]);
+			sup->elenum++;
+		}
+		arr[1] = 0;
+		free(inputs);
 	}
-	i++;
-	check_same(sup);
+	sup->elenum--;
+	check_same(sup->a);
 	if (sup->elenum == 1)
 		exit(0);
-	hardcoded(sup);
 	return (sup);
 }
 

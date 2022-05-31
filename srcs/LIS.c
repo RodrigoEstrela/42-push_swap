@@ -6,112 +6,67 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:12:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/30 17:49:12 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:17:10 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	checkneg(t_stack *p, int len)
+void	lis(t_supsta *sup)
 {
-	t_stack	*fds;
-	int		checkneg;
+	int	i;
+	int	max;
 
-	fds = p;
-	checkneg = 0;
-	while (fds)
+	i = 1;
+	sup->a = rotater(sup->a, 0);
+	max = sup->a->cnt;
+	max = calc_max(sup->a, max);
+	while (i < sup->elenum)
 	{
-		p->lislen += 1;
-		if (fds->cnt < 0)
-			checkneg++;
-		fds = fds->next;
-	}
-	if (checkneg == len - 1)
-		p->lislen--;
-	if (ft_lstindex(p->lislen - 2, p)->cnt < 0)
-		p->lislen--;
-//	printf("%d\n", p->lislen);
-	return (p->lislen);
-}
-
-static t_stack	*lis(int *v, int len, t_stack *p)
-{
-	int			i;
-	t_stack		*n;
-
-	p->lislen = 0;
-	i = -1;
-	n = ft_calloc(len, sizeof(*n));
-	while (++i < len)
-		n[i].cnt = v[i];
-	while (i--)
-	{
-		p = n + i;
-		while (p++ < n + len)
-		{
-			if (p->cnt > n[i].cnt && p->len >= n[i].len)
-			{
-				n[i].next = p;
-				n[i].len = p->len + 1;
-			}
-		}
-	}
-	p = n;
-	p->lislen = checkneg(p, len);
-	return (p);
-}
-
-static int	check_if_dif_nb(int a, int b)
-{
-	if (a != b)
-		return (1);
-	return (0);
-}
-
-static void	nemsei(t_supsta *sup, t_cenas *c)
-{
-	while (c->e_i[1]++ < c->lst_size)
-	{
-		while (++c->e_i[0] < c->fds)
-			if (!check_if_dif_nb(sup->a->cnt, c->arr_lis[c->e_i[0]]))
-				break ;
-		if (c->e_i[0] == c->fds)
+		if (sup->a->cnt != max)
 			sup = pb(sup);
 		else
-		{
-			sup->a = rotater(sup->a);
-			ft_printf("ra\n");
-		}
-		c->e_i[0] = -1;
+			sup->a = rotater(sup->a, 0);
+		i++;
 	}
 }
 
-void	notlis_gob(t_supsta *sup, int *arr_lst)
+void	putinrightplace(t_supsta *sup, t_calccom *fds)
 {
-	t_cenas	*c;
-	t_stack	*p;
-	t_stack *l;
+	int	a;
 
-	c = ft_calloc(sizeof(t_cenas), 1);
-	c->e_i = (int [2]){-1, -1};
-	c->lst_size = sup->elenum;
-	p = malloc(sizeof(t_stack) * c->lst_size);
-	free(p);
-	p = lis(arr_lst, c->lst_size, p);
-	l = p;
-	c->fds = p->lislen;
-	c->arr_lis = (int *)ft_calloc(sizeof(int), c->fds);
-	if (p->lislen == sup->elenum)
-		exit(0);
-	while (c->e_i[1] < c->fds)
+	a = ft_lstsize(sup->a);
+	if (fds->rot_a < a / 2)
 	{
-		c->arr_lis[c->e_i[1]] = l->cnt;
-		l = l->next;
-		c->e_i[1]++;
+		while (fds->rot_a && fds->rot_b)
+		{
+			sup = super_rotater(sup);
+			fds->rot_a--;
+			fds->rot_b--;
+		}
+		while (fds->rot_a--)
+			sup->a = rotater(sup->a, 0);
 	}
-	c->arr_lis[c->e_i[1]] = l->cnt;
-	c->e_i[1] = 0;
-	nemsei(sup, c);
-	free(c->arr_lis);
-	free(c);
+	else
+		while (a-- - fds->rot_a > 0)
+			sup->a = reverse_rotater(sup->a);
+	while (fds->rot_b--)
+		sup->b = rotater(sup->b, 1);
+	sup = pa(sup);
+}
+
+int	calc_e(t_stack *a, int e)
+{
+	int		min;
+	t_stack	*fds;
+
+	fds = a;
+	min = fds->cnt;
+	min = calc_min(fds, min);
+	while (fds->cnt != min)
+	{
+		fds = fds->next;
+		e++;
+	}
+	return (e);
 }
