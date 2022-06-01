@@ -6,7 +6,7 @@
 /*   By: rdas-nev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 12:15:47 by rdas-nev          #+#    #+#             */
-/*   Updated: 2022/05/05 13:47:55 by rdas-nev         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:52:34 by rdas-nev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ bool	is_number(char number[])
 
 	i = 0;
 	if (number[0] == '-')
-		i = 1;
+	{
+		if (!number[1])
+		{
+			ft_printf("Error\n");
+			exit(0);
+		}
+		else
+			i = 1;
+	}
 	while (number[i] != 0)
 	{
 		if (!ft_isdigit(number[i]))
